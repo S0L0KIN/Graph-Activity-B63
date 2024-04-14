@@ -156,9 +156,11 @@ Edge* getMSTprim(Graph* graph, int startVertex){
 
   Edge *mst = (Edge*)calloc(record->numTreeEdges, sizeof(Edge)); //know how many edges we created
   for(int i=0; i<record->numTreeEdges; i++) { //put in list
-    mst[i].fromVertex = record->tree[i].fromVertex;
-    mst[i].toVertex = record->tree[i].toVertex;
-    mst[i].weight = record->tree[i].weight;
+    if (record->tree[i].fromVertex != NOTHING && record->tree[i].toVertex != NOTHING) { //SANITY CHECK THE EDGES
+      mst[i].fromVertex = record->tree[i].fromVertex;
+      mst[i].toVertex = record->tree[i].toVertex;
+      mst[i].weight = record->tree[i].weight;
+    }
   }
   deleteRecord(record);
   return mst; //free and return
@@ -195,9 +197,11 @@ Edge* getDistanceTreeDijkstra(Graph* graph, int startVertex) {
 
   Edge *dt = (Edge*)calloc(record->numTreeEdges, sizeof(Edge)); //know how many edges we created
   for(int i=0; i<record->numTreeEdges; i++) { //put in list
-    dt[i].fromVertex = record->tree[i].fromVertex;
-    dt[i].toVertex = record->tree[i].toVertex;
-    dt[i].weight = record->tree[i].weight;
+    if (record->tree[i].fromVertex != NOTHING && record->tree[i].toVertex != NOTHING) { //SANITY CHECK
+      dt[i].fromVertex = record->tree[i].fromVertex;
+      dt[i].toVertex = record->tree[i].toVertex;
+      dt[i].weight = record->tree[i].weight;
+    }
   }
   deleteRecord(record);
   return dt; //free and return
